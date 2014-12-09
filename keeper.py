@@ -5,6 +5,11 @@ import sys
 import time
 import random
 import requests
+import argparse
+
+parser = argparse.ArgumentParser(description="Kepps a webapp up.")
+parser.add_argument("--pidfile", action="store", 
+		    default="/var/run/webapp-up-keeper.pid", help="where to save the pidfile.")
 
 __debug = False
 
@@ -21,6 +26,14 @@ else :
 # let's fork...
 if pid != 0 :
 	sys.exit(0)
+
+## We now write the pidfile...
+args = parser.parse_args()
+try :
+	with open(args.pidfile, "w") as pidfile :
+		pidfile.write("%d\n" % os.getpid())
+except :
+	print "Could not open pidfile %s" % args.pidfile
 
 
 ## okay we're daemonized, let's behave properly...
