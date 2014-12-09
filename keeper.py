@@ -19,13 +19,19 @@ if os.environ.get("DEBUG") == "TRUE" :
 	__debug = True
 	print "We will debug..."
 
+## If not debugging, fork to background.
 pid = None
 if __debug :
 	pid = 0 
 else :
 	pid = os.fork()
+	## let's just prevent bad shit from happenind
+	if  pid == -1 :
+		print "COULD NOT FORK TO BACKGROUND, THIS IS NOT SUPPOSED TO HAPPEN."
+		sys.exit(1)
+		
 
-# let's fork...
+# program is forked, we can exit.
 if pid != 0 :
 	sys.exit(0)
 
@@ -45,6 +51,7 @@ if not __debug :
 	sys.stdout.close()
 	sys.stderr.close()
 
+	sys.stdin = open("/dev/null", "r")
 	sys.stdout = open(args.logfile, "a+")
 	sys.stderr = sys.stdout
 
