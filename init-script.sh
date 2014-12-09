@@ -17,7 +17,7 @@ start)  echo "Enabling webapp-up-keeper:"
 	source /etc/webapp-up-keeper.conf
 	cd $WEBAPP_UP_KEEPER_PATH
 	source bin/activate
-	python keeper.py --pidfile=$WEBAPP_UP_KEEPER_PIDFILE
+	python keeper.py --pidfile=$WEBAPP_UP_KEEPER_PIDFILE --logfile=$WEBAPP_UP_KEEPER_LOGFILE
         ;;
 stop)   echo "Disabling webapp-up-keeper"
 	source /etc/webapp-up-keeper.conf

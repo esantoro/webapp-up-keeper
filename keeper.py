@@ -10,6 +10,8 @@ import argparse
 parser = argparse.ArgumentParser(description="Kepps a webapp up.")
 parser.add_argument("--pidfile", action="store", 
 		    default="/var/run/webapp-up-keeper.pid", help="where to save the pidfile.")
+parser.add_argument("--logfile", action="store", help="set the log file",
+		    default="/var/log/webapp-up-keeper.log")
 
 __debug = False
 
@@ -43,7 +45,7 @@ if not __debug :
 	sys.stdout.close()
 	sys.stderr.close()
 
-	sys.stdout = open("/var/log/heroku-up-keeper.log", "a+")
+	sys.stdout = open(args.logfile "a+")
 	sys.stderr = sys.stdout
 
 ## Okay now we're a decend deamon, let's do our job...
