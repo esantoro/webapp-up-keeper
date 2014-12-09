@@ -23,7 +23,9 @@ stop)   echo "Disabling webapp-up-keeper"
 	source /etc/webapp-up-keeper.conf
 	kill -9 `cat $WEBAPP_UP_KEEPER_PIDFILE`
         ;;
-restart) echo "Not implemented yet: do stop and then start again."
+restart) echo "Restarting webapp-up-keeper"
+	/etc/init.d/webapp-up-keeper stop
+	/etc/init.d/webapp-up-keeper start
         ;;
 reload|force-reload) echo "Not implemented yet."
         ;;
