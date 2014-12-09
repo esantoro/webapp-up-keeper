@@ -45,7 +45,7 @@ if not __debug :
 	sys.stdout.close()
 	sys.stderr.close()
 
-	sys.stdout = open(args.logfile "a+")
+	sys.stdout = open(args.logfile, "a+")
 	sys.stderr = sys.stdout
 
 ## Okay now we're a decend deamon, let's do our job...
